@@ -34,14 +34,14 @@ const RegisterComponent = () => {
       >
         <div className="mb-4 flex flex-col gap-6">
           <Input
-            size="lg"
+            size="md"
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
           <Input
-            size="lg"
+            size="md"
             label="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -49,7 +49,7 @@ const RegisterComponent = () => {
           />
           <Input
             type="password"
-            size="lg"
+            size="md"
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -74,8 +74,9 @@ const RegisterComponent = () => {
             </Typography>
           }
           containerProps={{ className: '-ml-2.5' }}
+          className="w-4 h-4"
         />
-        <Button className="mt-6" fullWidth type="submit">
+        <Button className="mt-6" fullWidth type="submit" size="sm">
           Register
         </Button>
         <Typography className="mt-4 text-center font-normal">

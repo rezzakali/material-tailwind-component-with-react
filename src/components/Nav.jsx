@@ -1,18 +1,13 @@
-import {
-  Button,
-  Collapse,
-  IconButton,
-  Navbar,
-  Typography,
-} from '@material-tailwind/react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { BiSun } from 'react-icons/bi';
-import { HiMoon } from 'react-icons/hi';
+import { Button, Collapse, IconButton, Navbar } from '@material-tailwind/react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import ColorMode from './ColorMode';
+import navList from './NavList';
+// import SignInSignUpButton from './SignInSignUpButton';
+import UserAvatar from './UserAvatar';
 
 function Nav() {
   const [openNav, setOpenNav] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     window.addEventListener(
@@ -21,84 +16,23 @@ function Nav() {
     );
   }, []);
 
-  const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal dark:text-white"
-      >
-        <a href="#" className="flex items-center">
-          Home
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal dark:text-white"
-      >
-        <a href="#" className="flex items-center">
-          About
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal dark:text-white"
-      >
-        <a href="#" className="flex items-center">
-          Blogs
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal dark:text-white"
-      >
-        <a href="#" className="flex items-center">
-          Contact
-        </a>
-      </Typography>
-    </ul>
-  );
-
   return (
     <Navbar className="sticky inset-0 z-50 mx-auto py-2 px-4 lg:px-8 lg:py-4 rounded-none shadow-none dark:bg-[#22262f] border-none">
       <div className="mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
+        <NavLink
+          as="NavLink"
+          to="/"
           className="mr-4 cursor-pointer py-1.5 font-medium dark:text-white"
         >
           Dev.Rezzak
-        </Typography>
+        </NavLink>
         <div className="hidden lg:block ">{navList}</div>
-
-        <div className="flex items-center justify-between">
-          {theme === 'light' ? (
-            <HiMoon
-              className="cursor-pointer mx-3"
-              onClick={() => setTheme('dark')}
-            />
-          ) : (
-            <BiSun
-              className="cursor-pointer mx-3  dark:text-yellow-400"
-              onClick={() => setTheme('light')}
-            />
-          )}
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>Login</span>
-          </Button>
+        <div className="flex items-center">
+          <ColorMode className="hidden lg:block" />
+          <UserAvatar />
+          {/* <SignInSignUpButton /> */}
         </div>
-
+        <ColorMode className="lg:hidden ml-auto" />
         <IconButton
           variant="text"
           className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -112,7 +46,7 @@ function Nav() {
               className="h-6 w-6 dark:text-gray-300"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1}
             >
               <path
                 strokeLinecap="round"
@@ -126,7 +60,7 @@ function Nav() {
               className="h-6 w-6 dark:text-gray-300"
               fill="none"
               stroke="currentColor"
-              strokeWidth={2}
+              strokeWidth={1}
             >
               <path
                 strokeLinecap="round"
@@ -137,13 +71,29 @@ function Nav() {
           )}
         </IconButton>
       </div>
-
       <Collapse open={openNav}>
-        <div className="container mx-auto">
-          {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Buy Now</span>
-          </Button>
+        {navList}
+        <div className="mx-auto flex flex-row justify-between">
+          <NavLink to="/sign-up" className=" lg:inline-block m-2 w-full">
+            <Button
+              as="NavLink"
+              variant="gradient"
+              size="sm"
+              className=" lg:inline-block m-2 w-full"
+            >
+              sign up
+            </Button>
+          </NavLink>
+          <NavLink to="/sign-up" className=" lg:inline-block m-2 w-full">
+            <Button
+              as="NavLink"
+              variant="gradient"
+              size="sm"
+              className=" lg:inline-block m-2 w-full"
+            >
+              sign in
+            </Button>
+          </NavLink>
         </div>
       </Collapse>
     </Navbar>

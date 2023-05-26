@@ -1,20 +1,21 @@
 import React from 'react';
-import Footer from './components/Footer';
-import Nav from './components/Nav';
-import RegisterComponent from './components/RegisterComponent';
-import SpeedDialComponent from './components/SpeedDial';
+import { Route, Routes } from 'react-router-dom';
+import About from './pages/About';
+import Blogs from './pages/Blogs';
+import Contact from './pages/Contact';
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
     <React.Fragment>
-      <Nav />
-      <div className="container mx-auto">
-        <RegisterComponent />
-        <br />
-        <SpeedDialComponent />
-        <br />
-      </div>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/sign-up" element={<SignUp />} />
+      </Routes>
     </React.Fragment>
   );
 };
